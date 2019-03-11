@@ -1,5 +1,8 @@
 package LN;
 
+import static COMUN.clsConstantes.PROPIEDAD_CREDITOS;
+import static COMUN.clsConstantes.PROPIEDAD_NOMBRE;
+
 public class clsAlumno extends clsPersona 
 {
 	private int num_Creditos;
@@ -23,8 +26,8 @@ public class clsAlumno extends clsPersona
 		
 		switch(propiedad)
 		{
-			case "Nombre": return 	this.getNombre();
-			case "Creditos": return this.num_Creditos;
+			case PROPIEDAD_NOMBRE: return 	this.getNombre();
+			case PROPIEDAD_CREDITOS: return this.num_Creditos;
 		
 		
 		}
