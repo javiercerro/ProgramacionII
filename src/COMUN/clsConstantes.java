@@ -9,15 +9,20 @@ package COMUN;
 public class clsConstantes 
 {
 	//CONSANTES PARA LAS PROPIEDADES DE LOS OBJETOS DE LN
-	public static final String PROPIEDAD_NOMBRE = "NOMBRE";
-	public static final String PROPIEDAD_CREDITOS = "CREDITOS";
+	public static final String PROPIEDAD_ALUMNO_NOMBRE = "NOMBRE";
+	public static final String PROPIEDAD_ALUMNO_DNI = "DNI";
+	public static final String PROPIEDAD_ALUMNO_APELLIDO = "APELLIDO";
+	public static final String PROPIEDAD_ALUMNO_ID = "ID";
+	
+	//Campos de acceso al resultSet de los registros de base de datos.
+	public static final String CAMPO_ALUMNO_DNI = "DNI";
+	public static final String CAMPO_ALUMNO_NOMBRE = "NOMBRE";
+	public static final String CAMPO_ALUMNO_APELLIDO = "APELLIDO";
+	public static final String CAMPO_ALUMNO_ID = "ID_ALUMNO";
 	
 	
-	//CONSTANTES PARA LA CREACIÓN DEL ACCESO A BASE DE DATOS.
-	public static final String URL="jdbc:mysql://localhost/";
-	public static final String SCHEMA = "local";
-	public static final String DRIVER = "com.mysql.jdbc.Driver";
-	public static final String USER = "root";
-	public static final String PASS = "root";
+	
+	
+	
 	
 }
