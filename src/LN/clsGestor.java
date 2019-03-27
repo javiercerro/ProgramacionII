@@ -31,6 +31,9 @@ public class clsGestor
 	
 	public void CargarAlumnos()
 	{
+		//Conecto a la base de datos.
+		objDatos.Connect();
+		//Leo la información y la uso.
 		ResultSet alumnos=objDatos.DameAlumnos();
 		try 
 		{
@@ -49,6 +52,9 @@ public class clsGestor
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		//Libero los recursos.
+		objDatos.Disconnect();
 	}
 	
 	public void CrearAlumno (String _nombre, String _apellido, String _dni)
@@ -57,8 +63,10 @@ public class clsGestor
 		
 		objAlumno = new clsAlumno(_nombre, _apellido, _dni);
 		miLista.add(objAlumno);
-		
+		//Lo guardo en base de datos.
+		objDatos.Connect();
 		objDatos.InsertarAlumno(_dni, _nombre, _apellido);
+		objDatos.Disconnect();
 		
 		
 		

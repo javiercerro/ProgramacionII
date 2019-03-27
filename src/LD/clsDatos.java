@@ -21,12 +21,25 @@ import static LD.clsConstantesDB.SQL_SELECT_ALUMNO;
  */
 public class clsDatos 
 {
+	/**
+	 * Objeto para crear la conexión a base de datos.
+	 */
 	Connection conn = null;
+	
+	/**
+	 * Objeto para crear la consulta a base de datos.
+	 */
+	PreparedStatement ps=null;
+	
+	/**
+	 * Objeto para devolver el resultado de la consulta.
+	 */
+	ResultSet rs=null;
 	
 	
 	public clsDatos()
 	{
-		this.Connect();
+		//
 	}
 	
 	/**
@@ -58,33 +71,39 @@ public class clsDatos
 		 try 
 		 {
 			conn.close();
+			ps.close(); // cerrar el statement tb cierra el resultset.
 		 } 
 		 catch (SQLException e) 
 		 {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		 } 
+			
+		 }
+		 finally 
+		 {
+			 try {conn.close();} catch(Exception e){/*no hago nada*/}
+			 try {ps.close();} catch(Exception e){/*no hago nada*/}
+		 }
+		 
 		 
 	 }
 	 
 	 public int InsertarAlumno(String dni, String nombre, String apellido)
 	 {
-		 PreparedStatement psInsertar = null;
+		 
 		 int regActualizados=0;
 		 int retorno=0;
 		 
 		 try 
 		 {
-			psInsertar = conn.prepareStatement(SQL_INSERT_ALUMNO,PreparedStatement.RETURN_GENERATED_KEYS);
-			psInsertar.setString(1, dni);
-			psInsertar.setString(2, nombre);
-			psInsertar.setString(3, apellido);
+			ps= conn.prepareStatement(SQL_INSERT_ALUMNO,PreparedStatement.RETURN_GENERATED_KEYS);
+			ps.setString(1, dni);
+			ps.setString(2, nombre);
+			ps.setString(3, apellido);
 			
-			regActualizados=psInsertar.executeUpdate();
+			regActualizados=ps.executeUpdate();
 			
 			if(regActualizados ==1)
 			{
-				ResultSet rs = psInsertar.getGeneratedKeys();
+				ResultSet rs = ps.getGeneratedKeys();
 	            if(rs.next())
 	            {
 	                retorno= rs.getInt(1);
@@ -105,25 +124,22 @@ public class clsDatos
 	 
 	 public ResultSet DameAlumnos() 
 	 {
-		 ResultSet retorno = null;
 		 
-		 retorno = sendSelect(SQL_SELECT_ALUMNO);
 		 
-		 return retorno;
+		 rs= sendSelect(SQL_SELECT_ALUMNO);
+		 
+		 return rs;
 		 
 	 }
 	 
 	 private ResultSet sendSelect(String sql)
 	 {
-		 
-
-			Statement stmt=null;
-			ResultSet rs=null;
+			
 			
 			try 
 			{
-				stmt = conn.createStatement();
-				rs=stmt.executeQuery(sql);
+				ps = conn.prepareStatement(sql);
+				rs=ps.executeQuery(sql);
 			} 
 			catch (SQLException e) 
 			{
